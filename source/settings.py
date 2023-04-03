@@ -1,5 +1,5 @@
 # game setting
-SCREEN_SIZE = (600, 800)
+SCREEN_SIZE = (500,500)
 TILESIZE = 128
 GAME_SIZE = 3
 FPS = 60
