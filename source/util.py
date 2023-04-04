@@ -2,6 +2,7 @@ import pygame
 import cv2
 import os
 
+
 class Border():
     def __init__(self, game_size, sceen_surface, tileSIze, color):
         self.game_size = game_size
@@ -18,44 +19,58 @@ class Border():
                              (col, 0), (col, self.game_size*self.tileSize))
 
 
+class Image():
+    def __init__(self, path) -> None:
+        self.path = path
+        if (self.isExist()):
+            self.bitmaps=cv2.imread(self.path)
+            self.h,self.w,self.channels=self.bitmaps.shape
+        else:
+            self.bitmaps = None
+
+    def isExist(self):
+        if (not os.path.isfile(self.path)):
+            return False
+        return True
+    def getHeight(self):
+        return self.h
+    def getWidth(self):
+        return self.w
+    def getChannels(self):
+        return self.channels
+    def getBitMap(self):
+        return self.bitmaps
+
+
 class ImageDivider():
-    def __init__(self, imagePath, gameSize) -> None:
-        self.imagePath = imagePath
+    def __init__(self, img: Image, gameSize,dst_folder) -> None:
+        self.img = img
         self.gameSize = gameSize
         self.divided_img_path = []
+        self.dst_folder=dst_folder
 
     def divideImage(self):
-        img = cv2.imread(self.imagePath)
-        h, w, channels = img.shape
-        divivedSize = h//self.gameSize
+        divivedSize = self.img.getHeight()//self.gameSize
         for row in range(1, self.gameSize+1):
             for col in range(1, self.gameSize+1):
                 if (((row-1)*self.gameSize+col) != self.gameSize*self.gameSize):
-                    fileName= f'{(row-1)*self.gameSize+col}.png'
-                    self.divided_img_path.append(r'../image'+fileName)
-                    self.exportToFile(fileName,img[(col-1)*divivedSize:col*divivedSize,
-                                        (row-1)*divivedSize:divivedSize*(row)])
+                    fileName = f'{(row-1)*self.gameSize+col}.png'
+                    self.divided_img_path.append(self.dst_folder+fileName)
+                    self.exportToFile(self.dst_folder+fileName, self.img.getBitMap()[(row-1)*divivedSize:row*divivedSize,
+                                                    (col-1)*divivedSize:divivedSize*(col)])
 
-    def exportToFile(self, fileName, img):
-        # dst_path = r'../source/'+fileName
-        
-        path = '../image'
-        cv2.imwrite(os.path.join(path , fileName), img)
+    def exportToFile(self,fileName,bitmap):
+     
+        cv2.imwrite(fileName,bitmap)
+
     def getAllPath(self):
         return self.divided_img_path
 
 
-i = ImageDivider("../image/a.png", 2)
-
-pygame.init()
-screen = pygame.display.set_mode((500,800))
-i.divideImage()
-for a in i.getAllPath():
-    print(a)
-while True:
-    pygame.display.flip()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit(0)
-
+grid = []
+for row in range(1, 4):
+    grid.append([])
+    for col in range(1, 1+3):
+        grid[row-1].append((row-1)*3+col)
+grid[-1][-1] = 0
+print(grid)

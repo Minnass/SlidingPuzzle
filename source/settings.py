@@ -10,3 +10,7 @@ BACKGROUND_COLOR = (40, 40, 40)
 LIGHTGREY = (100, 100, 100)
 DARKGREY = (40, 40, 40)
 WHITE = (255, 255, 255)
+
+# folder hold images
+IMAGES_FOLDER='../image/'
+
