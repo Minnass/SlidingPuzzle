@@ -1,32 +1,51 @@
 import pygame
 import random
 import time
-from Tile import *
-from settings import *
-from util import *
-from Board import *
+from  .GameSettings.Tile import Tile
+from .GameSettings.settings import *
+from .GameSettings.util import *
+from .GameSettings.Board import Board
+from enum import Enum
+
+
+class Mode(Enum):
+    HUMAN_MODE = 1
+    SOLVER_MODE = 2
+
+
 class Game():
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode(SCREEN_SIZE)
         pygame.display.set_caption(TITLE)
-        self.all_sprites=pygame.sprite.Group()
-        self.board=Board(self)
-        self.border=Border(GAME_SIZE ,self.screen)
-        # self.tiles=[]
-        # self.tile_grids=[]
-        # self.imageDivider=ImageDivider(,3)
+        self.all_sprites = pygame.sprite.Group()
+        self.board = Board(self, GAME_SIZE)
+        self.border = Border(GAME_SIZE, self.screen)
+        self.isPlaying = False
+
     def createGame(self):
-        for row in range(1,GAME_SIZE+1):
-            self.tile_grids.append([])
-            for col in range(1,1+GAME_SIZE):
-                self.tile_grids[row-1].append((row-1)*GAME_SIZE+col)
-        self.tile_grids[-1][-1]=0
-              
-        #Tao tile
+        self.isPlaying = False
+        self.Mode = Mode.HUMAN_MODEF
+
+    # Tao tile
+    def update(self):
+        pass
 
     def draw(self):
-        self.all_sprites.draw()
+        self.board.drawBoard()
         self.border.drawBorder()
         pygame.display.flip()
-    
+
+    def event(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit(0)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+
+
+game = Game()
+
+while True:
+    game.draw()

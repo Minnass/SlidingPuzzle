@@ -66,11 +66,3 @@ class ImageDivider():
     def getAllPath(self):
         return self.divided_img_path
 
-
-grid = []
-for row in range(1, 4):
-    grid.append([])
-    for col in range(1, 1+3):
-        grid[row-1].append((row-1)*3+col)
-grid[-1][-1] = 0
-print(grid)
