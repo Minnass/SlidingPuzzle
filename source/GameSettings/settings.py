@@ -14,6 +14,6 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BGCOLOUR = DARKGREY
 # folder hold images
-IMAGES_FOLDER=r'D:\workspace\SliddingPuzzlePygame\image\\'
+IMAGES_FOLDER=r'../image/'
 
 
