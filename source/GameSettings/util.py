@@ -22,6 +22,7 @@ class Border():
 class Image():
     def __init__(self, path) -> None:
         self.path = path
+        print(path)
         if (self.isExist()):
             self.bitmaps=cv2.imread(self.path)
             self.h,self.w,self.channels=self.bitmaps.shape

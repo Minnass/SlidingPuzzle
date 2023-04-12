@@ -1,4 +1,4 @@
-from Algorithm import*
+from solver.Algorithm import*
 
 from queue import PriorityQueue
 class AStar(Algorithm):

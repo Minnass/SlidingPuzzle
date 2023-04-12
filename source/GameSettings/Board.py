@@ -1,7 +1,6 @@
-from Tile import Tile
-from settings import *
+from GameSettings.Tile import Tile
 import pygame
-from util import *
+from GameSettings.util import *
 
 class Board():
     def __init__(self, all_sprites:pygame.sprite.Group, gameSize,screen) -> None:

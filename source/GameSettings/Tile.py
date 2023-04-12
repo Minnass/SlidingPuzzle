@@ -1,7 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
-from settings import *
-import cv2
+from GameSettings.settings import *
+
 class Tile(Sprite):
     def __init__(self, row, col, image_path, sprite_groups):
         Sprite.__init__(self, sprite_groups)

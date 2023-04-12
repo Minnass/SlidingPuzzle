@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from GameSettings.settings import *
 class Label:
     def __init__(self, x, y, text):
         self.x, self.y = x, y
